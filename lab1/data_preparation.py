@@ -99,33 +99,3 @@ def load_symbol_data():
 
     return X_train, y_train, X_test, y_test
 
-
-if __name__ == "__main__":
-    X_train_data, y_train_data, X_test_data, y_test_data = load_symbol_data()
-
-    if X_train_data is not None and X_train_data.size > 0 :
-        print(f"Размер обучающей выборки: X_train.shape = {X_train_data.shape}, y_train.shape = {y_train_data.shape}")
-        print(f"Размер тестовой выборки: X_test.shape = {X_test_data.shape}, y_test.shape = {y_test_data.shape}")
-
-        print("\nПример первого обучающего образа (первые 20 элементов):")
-        print(X_train_data[0][:20])
-        print("Метка первого обучающего образа:")
-        print(y_train_data[0])
-
-        import matplotlib.pyplot as plt
-        from datetime import datetime
-        if X_train_data.shape[1] == 24*24:
-            plt.imshow(X_train_data[0].reshape((24, 24)), cmap='gray')
-            label_key = None
-            target_label_list = list(y_train_data[0])
-            for char_k, char_v_list in {
-                'λ': [1, 0, 0, 0], 'φ': [0, 1, 0, 0],
-                'η': [0, 0, 1, 0], 'γ': [0, 0, 0, 1]
-            }.items():
-                if char_v_list == target_label_list:
-                    label_key = char_k
-                    break
-            plt.title(f"Символ: {label_key if label_key else 'Неизвестно'}")
-            plt.show()
-    else:
-        print("Данные не были загружены/сгенерированы.")
